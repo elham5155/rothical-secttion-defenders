@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Selection</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Select a Product</h1>
+        <div class="product-list">
+            <div class="product" data-product-id="1">
+                <img src="product1.jpg" alt="Product 1" class="product-img">
+                <h2>Product 1</h2>
+            </div>
+            <div class="product" data-product-id="2">
+                <img src="product2.jpg" alt="Product 2" class="product-img">
+                <h2>Product 2</h2>
+            </div>
+            <div class="product" data-product-id="3">
+                <img src="product3.jpg" alt="Product 3" class="product-img">
+                <h2>Product 3</h2>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.querySelectorAll('.product').forEach(product => {
+            product.addEventListener('click', function() {
+                const productId = this.getAttribute('data-product-id');
+                localStorage.setItem('selectedProduct', JSON.stringify({ productId }));
+                window.location.href = 'details.html';
+            });
+        });
+    </script>
+</body>
+</html>
