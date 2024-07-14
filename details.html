@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Details</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Product Details</h1>
+        <div id="product-details"></div>
+        <div class="price-options">
+            <button class="select-price" data-price="50">Buy for 50 USDT</button>
+            <button class="select-price" data-price="100">Buy for 100 USDT</button>
+            <button class="select-price" data-price="150">Buy for 150 USDT</button>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const productDetails = JSON.parse(localStorage.getItem('selectedProduct'));
+            if (!productDetails) {
+                alert('No product selected');
+                window.location.href = 'index.html';
+                return;
+            }
+
+            const productDetailsDiv = document.getElementById('product-details');
+            // Assuming product details are hardcoded for simplicity
+            const productImages = {
+                1: 'product1.jpg',
+                2: 'product2.jpg',
+                3: 'product3.jpg'
+            };
+
+            productDetailsDiv.innerHTML = `
+                <img src="${productImages[productDetails.productId]}" alt="Product Image" class="product-img">
+                <p>Product ID: ${productDetails.productId}</p>
+            `;
+        });
+
+        document.querySelectorAll('.select-price').forEach(button => {
+            button.addEventListener('click', function() {
+                const price = this.getAttribute('data-price');
+                localStorage.setItem('selectedPrice', JSON.stringify({ price }));
+                window.location.href = 'payment.html';
+            });
+        });
+    </script>
+</body>
+</html>
